@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "Trade": {
+      "title": "Trade",
+      "description": "A single logged trade item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "symbol": { "type": "string" },
+        "type": { "type": "string", "enum": ["LONG", "SHORT"] },
+        "entry": { "type": "number" },
+        "exit": { "type": "number" },
+        "size": { "type": "number" },
+        "stopLoss": { "type": "number" },
+        "takeProfit": { "type": "number" },
+        "status": { "type": "string", "enum": ["WIN", "LOSS", "OPEN", "BE"] },
+        "notes": { "type": "string" },
+        "strategy": { "type": "string" },
+        "timeframe": { "type": "string" },
+        "confluences": { "type": "array" },
+        "pnl": { "type": "number" },
+        "roi": { "type": "number" },
+        "screenshot": { "type": "string" }
+      },
+      "required": ["id", "userId", "date", "symbol", "type", "entry", "exit", "size", "status"]
+    },
+    "CapitalFlow": {
+      "title": "CapitalFlow",
+      "description": "A ledger deposit or withdrawal item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "type": { "type": "string", "enum": ["DEPOSIT", "WITHDRAWAL"] },
+        "amount": { "type": "number" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "userId", "date", "type", "amount"]
+    },
+    "DynamicConfig": {
+      "title": "DynamicConfig",
+      "description": "User specific categories, lists, templates and presets",
+      "type": "object",
+      "properties": {
+        "strategies": { "type": "array" },
+        "timeframes": { "type": "array" },
+        "confluences": { "type": "array" },
+        "exchanges": { "type": "array" },
+        "symbols": { "type": "array" },
+        "initialCapital": { "type": "number" },
+        "commissionTemplates": { "type": "array" }
+      }
+    }
+  },
+  "firestore": {
+    "trades/{tradeId}": {
+      "schema": "Trade",
+      "description": "User's log of trading operations"
+    },
+    "transactions/{transactionId}": {
+      "schema": "CapitalFlow",
+      "description": "Deposits and withdrawals to calculate current net liquidity"
+    },
+    "userSettings/{userId}": {
+      "schema": "DynamicConfig",
+      "description": "Dynamic workspace settings and configuration parameters"
+    }
+  }
+}

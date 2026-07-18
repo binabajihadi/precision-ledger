@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Precision Ledger",
+  "description": "A professional high-fidelity offline-first trading journal with real-time analytics, dynamic performance charting, local storage persistence, and CSV reports export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
